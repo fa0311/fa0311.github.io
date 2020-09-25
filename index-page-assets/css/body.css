@@ -1,0 +1,63 @@
+body {
+    font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+    margin: 0px;
+}
+
+#body {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#box {
+
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+#box p {
+    font-size: 1.8vw;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#box svg {
+    position: relative;
+    top: 0.3vw;
+    width: 1.8vw;
+    height: 1.8vw;
+}
+
+#box div {
+    position: relative;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    #box p {
+        font-size: 4vw;
+    }
+
+    #box svg {
+        width: 4vw;
+        height: 4vw;
+    }
+}
+
+#box div a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.boder {
+    height: 2px;
+    background-color: #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
