@@ -1,11 +1,11 @@
-#header {
+.header {
     overflow: hidden;
     width: 100vw;
     height: 100vh;
     position: relative;
 }
 
-#header #icon {
+.header #icon {
     width: 50%;
     position: absolute;
     top: 50%;
@@ -13,7 +13,7 @@
     transform: translateY(-50%) translateX(-50%);
 }
 
-#header #icon img {
+.header #icon img {
     border-radius: 50%;
     width: 20%;
     position: relative;
@@ -21,7 +21,7 @@
     transform: translateX(-50%);
 }
 
-#header #icon p {
+.header #icon p {
     position: relative;
     font-size: 1.8vw;
     text-align: center;
@@ -29,11 +29,11 @@
 
 @media (max-width: 1024px) {
 
-    #header #icon p {
+    .header #icon p {
         font-size: 4vw;
     }
 
-    #header #icon img {
+    .header #icon img {
         width: 40%;
     }
 }

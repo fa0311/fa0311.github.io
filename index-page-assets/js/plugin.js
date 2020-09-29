@@ -16,42 +16,26 @@
                 setTimeout(loop, 100);
             }
         }
-
-
-    }
-})(jQuery);
-
-/*アニメーションする文字*/
-class animation_text {
-
-    constructor(id) {
-        this.id = id;
     }
 
-    add_text(text, style = "") {
+    $.fn.animation_text = function (fn, time) {
         let i = 0;
-        while (text[i]) {
-            $(this.id).append('<span style="' + style + '" id=' + i + '>' + text[i] + '</span>');
+        let text_list = this.text();
+        this.text("");
+        while (text_list[i]) {
+            this.append('<span style="position: relative; opacity: 0;">' + text_list[i] + '</span>');
             i++;
         }
-        return this;
-    }
-    animation_list(fn, time) {
-        let i = 0;
         let ii = 0;
-        let id = this.id;
-        $(id).children().each(function () {
+        let iii = 0;
+        var that = this.find("span");
+        this.children().each(function () {
             setTimeout(
                 function () {
-                    fn(id + ' #' + ii);
-                    ii++;
-                }, i * time);
-            i++;
+                    fn(that.eq(iii));
+                    iii++;
+                }, ii * time);
+            ii++;
         });
     }
-
-}
-
-var text = function (id) {
-    return new animation_text(id);
-};
+})(jQuery);
