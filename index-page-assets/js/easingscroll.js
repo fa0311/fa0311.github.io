@@ -5,8 +5,8 @@ class easingscroll {
         this.eq = 0;
         this.scrollToplog = {};
         this.frame_speed = 30;
-        this.scroll_speed = 50;
-        this.scroll_distance = 10;
+        this.scroll_speed = 10;
+        this.scroll_distance = 1.5;
         this.mobile = $(window).width() <= 1024;
         this.easelist = {
             "default": function (n) {
@@ -36,8 +36,13 @@ class easingscroll {
             }
         }
         $("page").eq(0).addClass("page-display");
+        $("body").css({
+            "height": this.height * this.scroll_distance * ($('page').length - 1) + "px"
+        });
 
-        this.reload();
+        $(window).resize(function () {
+            $es.height = $("page").eq(0).height();
+        });
 
         var scroll = function () {
             if (!$es.mobile) {
@@ -82,11 +87,6 @@ class easingscroll {
     }
     get_easebox_top() {
         return (this.scrollTop + this.height / 2) % this.height - this.height / 2;
-    }
-    reload() {
-        $("body").css({
-            "height": this.height * this.scroll_distance * ($('page').length - 1) + "px"
-        });
     }
 }
 var $es = new easingscroll();
