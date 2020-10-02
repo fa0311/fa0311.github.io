@@ -5,81 +5,35 @@
     <title>SAMPLE</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <style>
-        p {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: auto;
-            width: 80%;
-            height: 3.2rem;
-
-            text-align: center;
-        }
-    </style>
+    <script src="index-page-assets/js/jquery-3.4.1.min.js"></script>
+    <script src="index-page-assets/js/twitter_timeline.js"></script>
 </head>
 
 <body>
-    <!-- 要素は必ずpageタグの中に追加してください -->
-    <!-- easeに動きの種類を指定します 最初から使えるのは以下の5種類です -->
-    <page>
-        <p>初期値(default)</p>
-    </page>
-    <page ease="quadratic">
-        <p>quadratic</p>
-    </page>
-    <page ease="reverse_quadratic">
-        <p>reverse_quadratic</p>
-    </page>
-    <page ease="cubic">
-        <p>cubic</p>
-    </page>
-    <page ease="reverse_cubic">
-        <p>reverse_cubic</p>
-    </page>
-    <!-- ここまで -->
-
-    <!-- 他のイージングを読み込む場合も同様 -->
-    <page ease="custom_ease_sample">
-        <p>custom_ease</p>
-    </page>
-    <!-- ここまで -->
-</body>
-
-<!-- ライブラリ読み込み -->
-<link rel="stylesheet" href="assets/easingscroll/css/main.css"><!-- head内に記述するのも可 -->
-<script type="text/javascript" src="assets/jquery/js/jquery-3.4.1.min.js"></script><!-- jqueryの読み込み -->
-<script type="text/javascript" src="assets/easingscroll/js/main.js"></script><!-- jqueryの読み込み -->
-<!-- ここまで -->
-
-<!-- 動きを追加したい場合は$easingscrollのeaselistに記述 -->
-<!-- 応用すればtop以外の動きも付けることが可能 -->
-<script type="text/javascript">
-    $easingscroll.easelist.custom_ease_sample = function (n) {
-        if (n > 100) n = 100;
-        if (n < -100) n = -100;
-        return {
-            "top": n
+    <script>
+        /*インスタンスの作成*/
+        var twitter_id = "faa0311"; //取得したいTwitterID
+        var fn1 = function () { //取得したあとの処理
+            console.log("読み込みが完了しました");
+            output(); //output関数を実行 (下記で定義)
         };
-    }
-</script>
-<!-- ここまで -->
+        var jquery_instance = $('body'); //jqueryのインスタンスを指定 この要素の最後(append)に埋め込みリンクを展開する 指定しないとbodyの最後になる
 
-<!-- js解説 -->
-<script type="text/javascript">
-    console.log("インスタンス");
-    console.log($easingscroll);
-    console.log("pageの大きさ");
-    console.log($easingscroll.height);
-    console.log("現在のスクロール位置");
-    console.log($easingscroll.scrollTop);
-    console.log("pageの量");
-    console.log($easingscroll.eq);
-    console.log("イージングのリスト");
-    console.log($easingscroll.easelist);
-</script>
-<!-- ここまで -->
+        var twitter_timeline = new twitter_timeline_get(twitter_id, fn1,
+            jquery_instance); //第1引数 必須 第2引数 任意 第3引数 任意
+
+
+        /*関数の解説*/
+        var fn2 = function () { //取得したあとの処理
+            console.log("読み込みが完了しました");
+            console.log(twitter_timeline.tweet); //ツイートを取得
+        };
+
+        function output() {
+            console.log(twitter_timeline.tweet); //ツイートを取得
+            twitter_timeline.loadmore(fn2); //20件しか読み込めないため更に読み込む場合はこの関数を実行する  第1引数 任意
+        }
+    </script>
+</body>
 
 </html>
