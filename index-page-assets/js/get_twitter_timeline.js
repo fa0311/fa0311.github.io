@@ -40,51 +40,57 @@ class twitter_timeline_get {
                 });
 
                 /*汎用型ツイートエンコーダー*/
-                var tweet_text = [];
+                var tweet_text_list = [];
+                var tweet_text_emoji = "";
                 data_instance.find('p.timeline-Tweet-text')[0].childNodes.forEach(function (tweet_data) {
                     let tweet_instance = $(tweet_data);
 
                     /*文字の処理*/
                     if (tweet_data.data) {
-                        tweet_text.push({
+                        tweet_text_list.push({
                             "text": tweet_data.data,
-                            'tagname': "text"
+                            'type': "text"
                         });
+                        tweet_text_emoji += tweet_data.data;
                     }
 
                     /*絵文字の処理*/
                     if (tweet_instance.prop('tagName') == 'IMG') {
-                        tweet_text.push({
-                            'aria-label': tweet_instance.attr('aria-label'),
+                        tweet_text_list.push({
+                            'arialabel': tweet_instance.attr('aria-label'),
                             'title': tweet_instance.attr('title'),
                             'alt': tweet_instance.attr('alt'),
                             'src': tweet_instance.attr('src'),
-                            'tagname': tweet_instance.prop('tagName')
+                            'type': 'img'
                         });
+                        tweet_text_emoji += tweet_instance.attr('alt');
                     }
 
                     /*改行*/
                     if (tweet_instance.prop('tagName') == 'BR') {
-                        tweet_text.push({
-                            'tagname': tweet_instance.prop('tagName')
+                        tweet_text_list.push({
+                            'type': 'br'
                         });
+                        tweet_text_emoji += '\n';
                     }
 
                     /*引用RTの元ツイ ハッシュタグ メンション*/
                     if (tweet_instance.prop('tagName') == 'A') {
                         if (tweet_instance.attr('data-scribe')) {
                             /*ハッシュタグ メンション*/
-                            tweet_text.push({
+                            tweet_text_list.push({
                                 'data': tweet_instance.attr('data-scribe'),
                                 'value': tweet_instance.find('span.PrettyLink-prefix').text() + tweet_instance.find('span.PrettyLink-value').text(),
                                 'link': tweet_instance.prop('href'),
-                                'tagname': tweet_instance.prop('tagName')
+                                'type': 'tag'
                             });
+                            tweet_text_emoji += tweet_instance.find('span.PrettyLink-prefix').text() + tweet_instance.find('span.PrettyLink-value').text();
+
                         } else {
-                            /*引用RTの元ツイ*/
-                            tweet_text.push({
+                            /*url*/
+                            tweet_text_list.push({
                                 'link': tweet_instance.prop('href'),
-                                'tagname': tweet_instance.prop('tagName')
+                                'type': 'link'
                             });
                         }
                     }
@@ -103,28 +109,29 @@ class twitter_timeline_get {
                     },
                     'tweet': {
                         'text': data_instance.find('p.timeline-Tweet-text').text(),
-                        'list': tweet_text
+                        'textemoji': tweet_text_emoji,
+                        'list': tweet_text_list
                     },
                     'share': {
-                        'share': {
+                        'like': {
                             'link': data_instance.find('a.TweetAction.TweetAction--heart.web-intent').attr('href'),
-                            'data-scribe': data_instance.find('a.TweetAction.TweetAction--heart.web-intent').attr('data-scribe'),
+                            'datascribe': data_instance.find('a.TweetAction.TweetAction--heart.web-intent').attr('data-scribe'),
                         },
                         'Twitter': {
                             'link': data_instance.find('a.timeline-ShareMenu-option').eq(0).attr('href'),
-                            'data-scribe': data_instance.find('a.timeline-ShareMenu-option').eq(0).attr('data-scribe'),
+                            'datascribe': data_instance.find('a.timeline-ShareMenu-option').eq(0).attr('data-scribe'),
                         },
                         'Facebook': {
                             'link': data_instance.find('a.timeline-ShareMenu-option').eq(1).attr('href'),
-                            'data-scribe': data_instance.find('a.timeline-ShareMenu-option').eq(1).attr('data-scribe'),
+                            'datascribe': data_instance.find('a.timeline-ShareMenu-option').eq(1).attr('data-scribe'),
                         },
                         'LinkedIn': {
                             'link': data_instance.find('a.timeline-ShareMenu-option').eq(2).attr('href'),
-                            'data-scribe': data_instance.find('a.timeline-ShareMenu-option').eq(2).attr('data-scribe'),
+                            'datascribe': data_instance.find('a.timeline-ShareMenu-option').eq(2).attr('data-scribe'),
                         },
                         'Tumblr': {
                             'link': data_instance.find('a.timeline-ShareMenu-option').eq(3).attr('href'),
-                            'data-scribe': data_instance.find('a.timeline-ShareMenu-option').eq(3).attr('data-scribe'),
+                            'datascribe': data_instance.find('a.timeline-ShareMenu-option').eq(3).attr('data-scribe'),
                         }
                     },
                     'link': data_instance.find('.timeline-Tweet.u-cf.js-tweetIdInfo.js-clickToOpenTarget').attr('data-click-to-open-target'),
@@ -133,7 +140,7 @@ class twitter_timeline_get {
                         'label': data_instance.find('time.dt-updated').attr('aria-label'),
                         'title': data_instance.find('time.dt-updated').attr('title')
                     },
-                    'Icon': data_instance.find('.Icon.Icon--twitter').attr('aria-label'),
+                    'label': data_instance.find('.Icon.Icon--twitter').attr('aria-label'),
                     'img': imglist
                 });
 

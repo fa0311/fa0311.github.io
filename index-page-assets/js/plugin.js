@@ -39,3 +39,11 @@
         });
     }
 })(jQuery);
+
+function easingscroll_plugin_load() {
+    $(".menu p").eq($es.eq).addClass("view");
+    $es.view_page_change = function (i) {
+        $(".menu p").removeClass("view");
+        $(".menu p").eq(i).addClass("view");
+    }
+}
