@@ -41,9 +41,20 @@
 })(jQuery);
 
 function easingscroll_plugin_load() {
+
     $(".menu p").eq($es.eq).addClass("view");
     $es.view_page_change = function (i) {
         $(".menu p").removeClass("view");
-        $(".menu p").eq(i).addClass("view");
+        if ($(window).width() > 1024) {
+            $(".menu p").eq([0, 1, 2][i]).addClass("view");
+        } else {
+            $(".menu p").eq([0, 1, 1, 1, 2][i]).addClass("view");
+        }
+    }
+    $es.easelist["reverse_cubic_img"] = function (n) {
+        $("page").eq($es.eq).find("img").css({
+            "top": n * -0.2
+        });
+        return $es.easelist["reverse_cubic"](n);
     }
 }

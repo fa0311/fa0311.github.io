@@ -1,16 +1,15 @@
-$(function () {
-    $("body").append('<page ease="reverse_cubic">' +
-        '<div class="header" id="top">' +
-        '<div id="icon">' +
-        '<img src="index-page-assets/img/icon.jpg" alt="main-img">' +
-        '<p id="title">yuki0311.com</p>' +
-        '</div>' +
-        '</div>' +
-        '</page>');
+$(window).on('load', function () {
+    $("#loading").animate({
+        "opacity": "0"
+    }, 500, 'easeOutCubic');
+    setTimeout(function () {
+        clearTimeout(timeout);
+        $("#loading").remove();
+    }, 500);
     $('#top #icon img').animate({
         blurRadius: 50
     }, {
-        duration: 1500,
+        duration: 2000,
         easing: 'swing',
         step: function () {
             $('.header #icon img').css({
@@ -20,48 +19,124 @@ $(function () {
         }
     });
 
+
+
     $('.header #icon #title').animation_text(function (that) {
         that.css({
-            "top": "50px",
-            "right": "50px"
+            "top": "70px",
+            "right": "70px"
         });
         that.animate({
             top: "0px",
             right: "0px",
             opacity: "1"
         }, 1500, 'easeOutCubic');
-    }, 100);
+        setTimeout(function () {
+            that.hover(function () {
+                that.stop();
+                that.animate({
+                    top: "-10px",
+                }, 50, 'easeOutCubic');
+            }, function () {
+                that.stop();
+                that.animate({
+                    top: "0px",
+                }, 200, 'easeOutCubic');
+            });
+        }, 1500);
+    }, 150);
+});
+$(function () {
+    $('html,body').animate({
+        scrollTop: 0
+    }, 1000);
+    $("body").append('<div class="menu">' +
+            '<p>TopPage</p>' +
+            '<div class="boder">' +
+            '</div>' +
+            '<p>Service</p>' +
+            '<div class="boder">' +
+            '</div>' +
+            '<p>Social</p>' +
+            '<div class="boder">' +
+            '</div>')
+        .append('<page ease="reverse_cubic_img">' +
+            '<div class="header" id="top">' +
+            '<div id="icon">' +
+            '<img src="/index-page-assets/img/icon.jpg" alt="main-img">' +
+            '<p id="title">yuki0311.com</p>' +
+            '</div>' +
+            '</div>' +
+            '</page>')
     $(".sns-feed-btn").click(
         function () {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
+    [...Array(3)].forEach(function (data, i) {
+        $(".menu p").eq(i).hover(
+            function () {
+                $(".menu .boder").eq(i).stop();
+                $(".menu .boder").eq(i).animate({
+                    "width": "100%"
+                }, 200, 'easeOutCubic');
+            },
+            function () {
+                $(".menu .boder").eq(i).stop();
+                $(".menu .boder").eq(i).animate({
+                    "width": "0%"
+                }, 600, 'easeOutCubic');
+            }
+        );
+        $(".menu p").eq(i).click(
+            function () {
+                if ($(window).width() > 1024) {
+                    $("html").animate({
+                        scrollTop: $es.height * [0, 1, 2][i] * $es.scroll_distance
+                    }, 1500);
+                } else {
+                    $(".menu .boder").eq(i).animate({
+                        "width": "0%"
+                    }, 600, 'easeOutCubic');
+                    $("html").animate({
+                        scrollTop: $es.height * [0, 1, 4][i] * $es.scroll_distance
+                    }, 1500);
+                }
+            });
+    });
 
 
-
-    let work_list = [{
-        "text": "a",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg"
+    [{
+        "title": "youtubeの拡張機能",
+        "text": "使用した主な技術 JavaScript jQuery",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
+        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
     }, {
-        "text": "a",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg"
+        "title": "トークを盛り上げてくれるlinebot",
+        "text": "使用した主な技術 PHP SQLite LIFF",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
+        "url": "http://yuki0311.com/pikapika/"
     }, {
-        "text": "a",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg"
-    }];
-    work_list.forEach(function (d, i) {
+        "title": "cpu使用率を確認できるサイト",
+        "text": "使用した主な技術 Python Flask JavaScript",
+        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
+        "url": "https://blog.yuki0311.com/cpu-checker/"
+    }].forEach(function (d, i) {
         if ($(window).width() > 1024) {
             if (i % 3 == 0) {
-                $("body").append('<page ease="reverse_cubic"><div class="container"></div></page>');
+                $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
             }
         } else {
-            $("body").append('<page ease="reverse_cubic"><div class="container"></div></page>');
+            $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
         }
-        $("page").last().children("div").append('<div class="item">' +
+        $("page").last().children("div").append('<a href="' + d.url + '">' +
+            '<div class="item">' +
             '<div class="img">' +
-            '<img src=' + d.img + ' alt="Vtuberの配信を便利に見れるchrome拡張機能を作りました">' +
-            '</div>' + d.text +
-            '</div>');
+            '<img src=' + d.img + ' alt="画像">' +
+            '</div>' +
+            '<p class="title">' + d.title + '</p>' +
+            '<p>' + d.text + '</p>' +
+            '</div></a>');
     })
 
 
@@ -105,110 +180,80 @@ $(function () {
         '</page>');
 
     function add_btn(id, url) {
-        $('#' + id + ' svg').css({
-            "-webkit-filter": "blur(50px)",
-            "filter": "blur(50px)"
-        });
+        $('#' + id).hover(
+            function () {
+                $('#' + id + ' .boder').animate({
+                    "width": "20em",
+                    "opacity": "1"
+                }, 1000, 'easeOutCubic');
 
-        $('#' + id + ' svg').animate({
-            blurRadius: 50
-        }, {
-            duration: 1500,
-            easing: 'swing',
-            step: function () {
-                $('#' + id + ' svg').css({
-                    "-webkit-filter": "blur(" + (50 - this.blurRadius) + "px)",
-                    "filter": "blur(" + (50 - this.blurRadius) + "px)"
-                });
+                $('#' + id + ' span').animate({
+                    "margin-right": "3px",
+                    "margin-left": "3px"
+                }, 1000, 'easeOutCubic');
+
+                $('#' + id + ' svg').animate({
+                    "margin-right": "6px",
+                    "margin-left": "6px"
+                }, 1000, 'easeOutCubic');
+
+            },
+            function () {
+                $('#' + id + ' .boder').stop();
+                $('#' + id + ' .boder').animate({
+                    "width": "0px",
+                    "opacity": "0"
+                }, 1000, 'easeOutCubic');
+                $('#' + id + ' span').stop();
+                $('#' + id + ' span').animate({
+                    "margin-right": "0px",
+                    "margin-left": "0px"
+                }, 1000, 'easeOutCubic');
+
+                $('#' + id + ' svg').stop();
+                $('#' + id + ' svg').animate({
+                    "margin-right": "3px",
+                    "margin-left": "3px"
+                }, 1000, 'easeOutCubic');
             }
-        });
+        );
+        $('#' + id).click(
+            function () {
+                $('#' + id + ' .boder').stop();
+                $('#' + id + ' .boder').animate({
+                    "width": "30em",
+                    "opacity": "0"
+                }, 1000, 'easeOutCubic');
 
-        $('#' + id + ' span').animation_text(function (that) {
-            that.css({
-                "top": "50px",
-                "right": "50px"
-            });
-            that.animate({
-                top: "0px",
-                right: "0px",
-                opacity: "1"
-            }, 1500, 'easeOutCubic');
-        }, 100);
+                $('#' + id + ' span').stop();
+                $('#' + id + ' span').animate({
+                    "margin-right": "6px",
+                    "margin-left": "6px",
+                    "opacity": "0"
+                }, 1000, 'easeOutCubic');
 
-        setTimeout(function () {
-            $('#' + id).hover(
-                function () {
-                    $('#' + id + ' .boder').stop();
-                    $('#' + id + ' .boder').animate({
-                        "width": "20em",
-                        "opacity": "1"
-                    }, 1000, 'easeOutCubic');
+                $('#' + id + ' svg').stop();
+                $('#' + id + ' svg').animate({
+                    "margin-right": "9px",
+                    "margin-left": "9px",
+                    "opacity": "0"
+                }, 1000, 'easeOutCubic');
+                setTimeout(
+                    function () {
+                        window.open(url, "_self");
+                    }, 800);
+            }
+        )
 
-                    $('#' + id + ' span').stop();
-                    $('#' + id + ' span').animate({
-                        "margin-right": "3px",
-                        "margin-left": "3px"
-                    }, 1000, 'easeOutCubic');
-
-                    $('#' + id + ' svg').stop();
-                    $('#' + id + ' svg').animate({
-                        "margin-right": "6px",
-                        "margin-left": "6px"
-                    }, 1000, 'easeOutCubic');
-
-                },
-                function () {
-                    $('#' + id + ' .boder').stop();
-                    $('#' + id + ' .boder').animate({
-                        "width": "0px",
-                        "opacity": "0"
-                    }, 1000, 'easeOutCubic');
-                    $('#' + id + ' span').stop();
-                    $('#' + id + ' span').animate({
-                        "margin-right": "0px",
-                        "margin-left": "0px"
-                    }, 1000, 'easeOutCubic');
-
-                    $('#' + id + ' svg').stop();
-                    $('#' + id + ' svg').animate({
-                        "margin-right": "3px",
-                        "margin-left": "3px"
-                    }, 1000, 'easeOutCubic');
-                }
-            );
-            $('#' + id).click(
-                function () {
-                    $('#' + id + ' .boder').stop();
-                    $('#' + id + ' .boder').animate({
-                        "width": "30em",
-                        "opacity": "0"
-                    }, 1000, 'easeOutCubic');
-
-                    $('#' + id + ' span').stop();
-                    $('#' + id + ' span').animate({
-                        "margin-right": "6px",
-                        "margin-left": "6px",
-                        "opacity": "0"
-                    }, 1000, 'easeOutCubic');
-
-                    $('#' + id + ' svg').stop();
-                    $('#' + id + ' svg').animate({
-                        "margin-right": "9px",
-                        "margin-left": "9px",
-                        "opacity": "0"
-                    }, 1000, 'easeOutCubic');
-                    setTimeout(
-                        function () {
-                            window.open(url, "_self");
-                        }, 800);
-                }
-            )
-
-        }, 1500);
     }
-    add_btn("twitter", "https://twitter.com/faa0311");
-    add_btn("github", "https://github.com/yukinashi");
-    add_btn("wordpress", "https://blog.yuki0311.com");
+
+    [
+        ["twitter", "https://twitter.com/faa0311"],
+        ["github", "https://github.com/yukinashi"],
+        ["wordpress", "https://blog.yuki0311.com"]
+    ].forEach(function (d) {
+        add_btn(d[0], d[1]);
+    });
     easingscroll_load();
     easingscroll_plugin_load();
 });

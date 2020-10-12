@@ -1,6 +1,6 @@
 class easingscroll {
     constructor() {
-        this.height = $("page").eq(0).height() / 2;
+        this.height = $(window).height() / 2;
         this.scrollTop = $(window).scrollTop();
         this.eq = 0;
         this.scrollToplog = {};
@@ -41,6 +41,7 @@ class easingscroll {
             }
         }
         $("page").eq(0).addClass("page-display");
+        $("page").eq(0).css("height", $(window).height());
 
         this.reload();
 
@@ -54,6 +55,7 @@ class easingscroll {
                 $("page").eq($es.eq).addClass("page-display");
                 instance = $("page").eq($es.eq);
                 $es.view_page_change($es.eq);
+                $("page").eq($es.eq).css("height", $(window).height());
             }
             if (instance.attr("ease")) {
                 instance.css($es.easelist[instance.attr("ease")]($es.get_easebox_top()));
