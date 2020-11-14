@@ -46,9 +46,9 @@ function easingscroll_plugin_load() {
     $es.view_page_change = function (i) {
         $(".menu p").removeClass("view");
         if ($(window).width() > 1024) {
-            $(".menu p").eq([0, 1, 2][i]).addClass("view");
+            $(".menu p").eq([0, 1, 2, 3][i]).addClass("view");
         } else {
-            $(".menu p").eq([0, 1, 1, 1, 2][i]).addClass("view");
+            $(".menu p").eq([0, 1, 1, 1, 2, 2, 3][i]).addClass("view");
         }
     }
     $es.easelist["reverse_cubic_img"] = function (n) {

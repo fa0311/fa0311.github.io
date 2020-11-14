@@ -66,7 +66,7 @@ $(function () {
         .append('<page ease="reverse_cubic_img">' +
             '<div class="header" id="top">' +
             '<div id="icon">' +
-            '<img src="/index-page-assets/img/icon.jpg" alt="main-img">' +
+            '<img src="https://yuki0311.com/index-assets/img/icon.jpg" alt="main-img">' +
             '<p id="title">yuki0311.com</p>' +
             '</div>' +
             '</div>' +
@@ -76,7 +76,7 @@ $(function () {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
-    [...Array(3)].forEach(function (data, i) {
+    [...Array(4)].forEach(function (data, i) {
         $(".menu p").eq(i).hover(
             function () {
                 $(".menu .boder").eq(i).stop();
@@ -95,14 +95,14 @@ $(function () {
             function () {
                 if ($(window).width() > 1024) {
                     $("html").animate({
-                        scrollTop: $es.height * [0, 1, 2][i] * $es.scroll_distance
+                        scrollTop: $es.height * [0, 1, 2, 3][i] * $es.scroll_distance
                     }, 1500);
                 } else {
                     $(".menu .boder").eq(i).animate({
                         "width": "0%"
                     }, 600, 'easeOutCubic');
                     $("html").animate({
-                        scrollTop: $es.height * [0, 1, 4][i] * $es.scroll_distance
+                        scrollTop: $es.height * [0, 1, 4, 6][i] * $es.scroll_distance
                     }, 1500);
                 }
             });
@@ -152,8 +152,8 @@ $(function () {
     }, {
         "title": "某ゲームのショップ確認linebot",
         "text": "総利用者数32000人 追加人数32000人",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
-        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
+        "img": "https://yuki0311.com/index-assets/img/fortnite.png",
+        "url": "https://fnjpnews.com/fortnitejpdaily-linebot"
     }]);
     
 
