@@ -73,7 +73,7 @@ class easingscroll {
     }
     reload() {
         $("body").css({
-            "height": this.height * ($('page').length - 1) * this.scroll_distance + (this.scroll_distance * 100) + "px"
+            "height": (this.height * ($('page').length - 1)) * this.scroll_distance * 1.2 + "px"
         });
     }
 }

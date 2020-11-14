@@ -54,7 +54,10 @@ $(function () {
             '<p>TopPage</p>' +
             '<div class="boder">' +
             '</div>' +
-            '<p>Service</p>' +
+            '<p>Tech</p>' +
+            '<div class="boder">' +
+            '</div>' +
+            '<p>Popular</p>' +
             '<div class="boder">' +
             '</div>' +
             '<p>Social</p>' +
@@ -106,38 +109,53 @@ $(function () {
     });
 
 
-    [{
+    let article_make = function (data) {
+        data.forEach(function (d, i) {
+            if ($(window).width() > 1024) {
+                if (i % 3 == 0) {
+                    $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
+                }
+            } else {
+                $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
+            }
+            $("page").last().children("div").append('<a href="' + d.url + '">' +
+                '<div class="item">' +
+                '<div class="img">' +
+                '<img src=' + d.img + ' alt="画像">' +
+                '</div>' +
+                '<p class="title">' + d.title + '</p>' +
+                '<p>' + d.text + '</p>' +
+                '</div></a>');
+        })
+    };
+    article_make([{
         "title": "youtubeの拡張機能",
         "text": "使用した主な技術 JavaScript jQuery",
         "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
         "url": "https://blog.yuki0311.com/youtube-feature-rich/"
     }, {
+            "title": "トークを盛り上げてくれるlinebot",
+            "text": "使用した主な技術 PHP SQLite LIFF",
+            "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
+            "url": "http://yuki0311.com/pikapika/"
+    }, {
+            "title": "cpu使用率を確認できるサイト",
+            "text": "使用した主な技術 Python Flask JavaScript",
+            "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
+            "url": "https://blog.yuki0311.com/cpu-checker/"
+    }]);
+    article_make([{
         "title": "トークを盛り上げてくれるlinebot",
-        "text": "使用した主な技術 PHP SQLite LIFF",
+        "text": "総利用者数67000人 追加人数6200人",
         "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
         "url": "http://yuki0311.com/pikapika/"
     }, {
-        "title": "cpu使用率を確認できるサイト",
-        "text": "使用した主な技術 Python Flask JavaScript",
-        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
-        "url": "https://blog.yuki0311.com/cpu-checker/"
-    }].forEach(function (d, i) {
-        if ($(window).width() > 1024) {
-            if (i % 3 == 0) {
-                $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
-            }
-        } else {
-            $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
-        }
-        $("page").last().children("div").append('<a href="' + d.url + '">' +
-            '<div class="item">' +
-            '<div class="img">' +
-            '<img src=' + d.img + ' alt="画像">' +
-            '</div>' +
-            '<p class="title">' + d.title + '</p>' +
-            '<p>' + d.text + '</p>' +
-            '</div></a>');
-    })
+        "title": "某ゲームのショップ確認linebot",
+        "text": "総利用者数32000人 追加人数32000人",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
+        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
+    }]);
+    
 
 
     $('body').append('<page ease="reverse_cubic">' +
