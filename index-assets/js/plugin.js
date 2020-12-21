@@ -45,9 +45,11 @@ function easingscroll_plugin_load() {
     $(".menu p").eq($es.eq).addClass("view");
     $es.view_page_change = function (i) {
         $(".menu p").removeClass("view");
-        if ($(window).width() > 1024) {
+        if ($(window).width() > 1200) {
             $(".menu p").eq([0, 1, 2, 3][i]).addClass("view");
-        } else {
+        } else if ($(window).width() > 800) {
+            $(".menu p").eq([0, 1, 1, 2, 3][i]).addClass("view");
+        }else{
             $(".menu p").eq([0, 1, 1, 1, 2, 2, 3][i]).addClass("view");
         }
     }

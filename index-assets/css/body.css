@@ -78,10 +78,10 @@ a {
     position: relative;
     font-size: 1.8vw;
     text-align: center;
+    margin: 10px 0px;
 }
 
 @media (max-width: 1024px) {
-
     .header #icon p {
         font-size: 4vw;
     }
@@ -89,6 +89,18 @@ a {
     .header #icon img {
         width: 40%;
     }
+}
+
+
+@media (min-width: 1920px) {
+    .header #icon img {
+        width: 192px;
+    }
+
+    .header #icon p {
+        font-size: 35px;
+    }
+
 }
 
 /*sns*/
@@ -117,6 +129,22 @@ a {
     position: relative;
     cursor: pointer;
 }
+
+
+@media (min-width: 1920px) {
+
+
+    .sns-feed p {
+        font-size: 35px;
+    }
+
+    .sns-feed svg {
+        width: 35px;
+        height: 35px;
+    }
+
+}
+
 
 @media (max-width: 1024px) {
     .sns-feed p {

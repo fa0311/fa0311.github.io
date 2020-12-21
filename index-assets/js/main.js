@@ -1,4 +1,7 @@
 $(window).on('load', function () {
+    $(window).resize(function () {
+        $es.reload();
+    });
     $("#loading").animate({
         "opacity": "0"
     }, 500, 'easeOutCubic');
@@ -22,10 +25,17 @@ $(window).on('load', function () {
 
 
     $('.header #icon #title').animation_text(function (that) {
-        that.css({
-            "top": "70px",
-            "right": "70px"
-        });
+        if ($(window).width() > 1024) {
+            that.css({
+                "top": "70px",
+                "right": "70px"
+            });
+        } else {
+            that.css({
+                "top": "30px",
+                "right": "30px"
+            });
+        }
         that.animate({
             top: "0px",
             right: "0px",
@@ -93,9 +103,13 @@ $(function () {
         );
         $(".menu p").eq(i).click(
             function () {
-                if ($(window).width() > 1024) {
+                if ($(window).width() > 1200) {
                     $("html").animate({
                         scrollTop: $es.height * [0, 1, 2, 3][i] * $es.scroll_distance
+                    }, 1500);
+                } else if ($(window).width() > 800) {
+                    $("html").animate({
+                        scrollTop: $es.height * [0, 1, 3, 4][i] * $es.scroll_distance
                     }, 1500);
                 } else {
                     $(".menu .boder").eq(i).animate({
@@ -111,8 +125,12 @@ $(function () {
 
     let article_make = function (data) {
         data.forEach(function (d, i) {
-            if ($(window).width() > 1024) {
+            if ($(window).width() > 1200) {
                 if (i % 3 == 0) {
+                    $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
+                }
+            }else if ($(window).width() > 800) {
+                if (i % 2 == 0) {
                     $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
                 }
             } else {
@@ -128,6 +146,7 @@ $(function () {
                 '</div></a>');
         })
     };
+    
     article_make([{
         "title": "youtubeの拡張機能",
         "text": "使用した主な技術 JavaScript jQuery",
@@ -267,7 +286,7 @@ $(function () {
 
     [
         ["twitter", "https://twitter.com/faa0311"],
-        ["github", "https://github.com/yukinashi"],
+        ["github", "https://github.com/fa0311"],
         ["wordpress", "https://blog.yuki0311.com"]
     ].forEach(function (d) {
         add_btn(d[0], d[1]);
