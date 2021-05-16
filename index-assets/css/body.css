@@ -1,5 +1,10 @@
+@font-face {
+    font-family: 'YUGOTHR';
+    src: url(/index-assets/font/YUGOTHR.TTC);
+}
+
 body {
-    font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+    font-family: "YUGOTHR";
     margin: 0px;
     user-select: none;
     -moz-user-select: none;
@@ -89,6 +94,7 @@ a {
     .header #icon p {
         font-size: 4vw;
     }
+
     .header #icon img {
         width: 40%;
     }
@@ -98,6 +104,7 @@ a {
     .header #icon img {
         width: 192px;
     }
+
     .header #icon p {
         font-size: 35px;
     }
@@ -136,6 +143,7 @@ a {
     .sns-feed p {
         font-size: 35px;
     }
+
     .sns-feed svg {
         width: 35px;
         height: 35px;
@@ -146,6 +154,7 @@ a {
     .sns-feed p {
         font-size: 4vw;
     }
+
     .sns-feed svg {
         width: 4vw;
         height: 4vw;
