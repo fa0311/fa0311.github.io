@@ -15,7 +15,9 @@ a {
     text-decoration: none;
 }
 
+
 /*menu*/
+
 .menu {
     position: fixed;
     top: 50px;
@@ -50,7 +52,9 @@ a {
     right: 0px;
 }
 
+
 /*top*/
+
 .header {
     overflow: hidden;
     width: 100vw;
@@ -85,25 +89,23 @@ a {
     .header #icon p {
         font-size: 4vw;
     }
-
     .header #icon img {
         width: 40%;
     }
 }
 
-
 @media (min-width: 1920px) {
     .header #icon img {
         width: 192px;
     }
-
     .header #icon p {
         font-size: 35px;
     }
-
 }
 
+
 /*sns*/
+
 .sns-feed {
     width: 50%;
     position: absolute;
@@ -130,27 +132,20 @@ a {
     cursor: pointer;
 }
 
-
 @media (min-width: 1920px) {
-
-
     .sns-feed p {
         font-size: 35px;
     }
-
     .sns-feed svg {
         width: 35px;
         height: 35px;
     }
-
 }
-
 
 @media (max-width: 1024px) {
     .sns-feed p {
         font-size: 4vw;
     }
-
     .sns-feed svg {
         width: 4vw;
         height: 4vw;
@@ -170,12 +165,26 @@ a {
     transform: translateY(-50%) translateX(-50%);
 }
 
+
 /*2*/
+
 .container {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-y: scroll;
+}
+
+@media (min-width: 1100px) {
+    page:nth-of-type(2) .container {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 780px) {
+    page:nth-of-type(3) .container {
+        justify-content: center;
+    }
 }
 
 .item {
@@ -204,4 +213,15 @@ a {
     height: 200px;
     object-fit: cover;
     position: relative;
+}
+
+.alert {
+    position: fixed;
+    bottom: 0px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.alert p {
+    margin: 0px;
 }

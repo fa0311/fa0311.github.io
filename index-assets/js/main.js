@@ -1,11 +1,11 @@
-$(window).on('load', function () {
-    $(window).resize(function () {
+$(window).on('load', function() {
+    $(window).resize(function() {
         $es.reload();
     });
     $("#loading").animate({
         "opacity": "0"
     }, 500, 'easeOutCubic');
-    setTimeout(function () {
+    setTimeout(function() {
         clearTimeout(timeout);
         $("#loading").remove();
     }, 500);
@@ -14,7 +14,7 @@ $(window).on('load', function () {
     }, {
         duration: 2000,
         easing: 'swing',
-        step: function () {
+        step: function() {
             $('.header #icon img').css({
                 "-webkit-filter": "blur(" + (50 - this.blurRadius) + "px)",
                 "filter": "blur(" + (50 - this.blurRadius) + "px)"
@@ -24,30 +24,30 @@ $(window).on('load', function () {
 
 
 
-    $('.header #icon #title').animation_text(function (that) {
-        if ($(window).width() > 1024) {
+    $('.header #icon #title').animation_text(function(that) {
+        if ($(window).width() > 1200)
             that.css({
                 "top": "70px",
                 "right": "70px"
             });
-        } else {
+        else
             that.css({
                 "top": "30px",
                 "right": "30px"
             });
-        }
+
         that.animate({
             top: "0px",
             right: "0px",
             opacity: "1"
         }, 1500, 'easeOutCubic');
-        setTimeout(function () {
-            that.hover(function () {
+        setTimeout(function() {
+            that.hover(function() {
                 that.stop();
                 that.animate({
                     top: "-10px",
                 }, 50, 'easeOutCubic');
-            }, function () {
+            }, function() {
                 that.stop();
                 that.animate({
                     top: "0px",
@@ -56,7 +56,14 @@ $(window).on('load', function () {
         }, 1500);
     }, 150);
 });
-$(function () {
+$(function() {
+
+    if (navigator.userAgent.indexOf("windows") !== -1 && navigator.userAgent.indexOf("android") !== -1) {
+        $("body").append('<div class="alert"><p>【警告】お使いのブラウザ(ie,edge,safari)は当サイトに対応していません</p></div>');
+    }
+
+
+
     $('html,body').animate({
         scrollTop: 0
     }, 1000);
@@ -82,19 +89,19 @@ $(function () {
             '</div>' +
             '</page>')
     $(".sns-feed-btn").click(
-        function () {
+        function() {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
-    [...Array(4)].forEach(function (data, i) {
+    [...Array(4)].forEach(function(data, i) {
         $(".menu p").eq(i).hover(
-            function () {
+            function() {
                 $(".menu .boder").eq(i).stop();
                 $(".menu .boder").eq(i).animate({
                     "width": "100%"
                 }, 200, 'easeOutCubic');
             },
-            function () {
+            function() {
                 $(".menu .boder").eq(i).stop();
                 $(".menu .boder").eq(i).animate({
                     "width": "0%"
@@ -102,39 +109,26 @@ $(function () {
             }
         );
         $(".menu p").eq(i).click(
-            function () {
-                if ($(window).width() > 1200) {
-                    $("html").animate({
-                        scrollTop: $es.height * [0, 1, 2, 3][i] * $es.scroll_distance
-                    }, 1500);
-                } else if ($(window).width() > 800) {
-                    $("html").animate({
-                        scrollTop: $es.height * [0, 1, 3, 4][i] * $es.scroll_distance
-                    }, 1500);
-                } else {
-                    $(".menu .boder").eq(i).animate({
-                        "width": "0%"
-                    }, 600, 'easeOutCubic');
-                    $("html").animate({
-                        scrollTop: $es.height * [0, 1, 4, 6][i] * $es.scroll_distance
-                    }, 1500);
-                }
+            function() {
+                $("html").animate({
+                    scrollTop: $es.height * i * $es.scroll_distance
+                }, 1500);
+                menu_btn_click = function() {};
+                setTimeout(function() {
+                    menu_btn_click = function() {
+                        $(".menu .boder").each(function(index, element) {
+                            $(element).css("width", "0");
+                        });
+                    }
+                }, 1500);
             });
     });
 
 
-    let article_make = function (data) {
-        data.forEach(function (d, i) {
-            if ($(window).width() > 1200) {
-                if (i % 3 == 0) {
-                    $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
-                }
-            }else if ($(window).width() > 800) {
-                if (i % 2 == 0) {
-                    $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
-                }
-            } else {
-                $("body").append('<page ease="reverse_cubic_img"><div class="container"></div></page>');
+    let article_make = function(data) {
+        data.forEach(function(d, i) {
+            if (i % 3 == 0) {
+                $("body").append('<page ease="reverse_cubic_img"><div  class="container"></div></page>');
             }
             $("page").last().children("div").append('<a href="' + d.url + '">' +
                 '<div class="item">' +
@@ -146,22 +140,22 @@ $(function () {
                 '</div></a>');
         })
     };
-    
+
     article_make([{
         "title": "youtubeの拡張機能",
         "text": "使用した主な技術 JavaScript jQuery",
         "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
         "url": "https://blog.yuki0311.com/youtube-feature-rich/"
     }, {
-            "title": "トークを盛り上げてくれるlinebot",
-            "text": "使用した主な技術 PHP SQLite LIFF",
-            "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
-            "url": "http://yuki0311.com/pikapika/"
+        "title": "トークを盛り上げてくれるlinebot",
+        "text": "使用した主な技術 PHP SQLite LIFF",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
+        "url": "http://yuki0311.com/pikapika/"
     }, {
-            "title": "cpu使用率を確認できるサイト",
-            "text": "使用した主な技術 Python Flask JavaScript",
-            "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
-            "url": "https://blog.yuki0311.com/cpu-checker/"
+        "title": "cpu使用率を確認できるサイト",
+        "text": "使用した主な技術 Python Flask JavaScript",
+        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
+        "url": "https://blog.yuki0311.com/cpu-checker/"
     }]);
     article_make([{
         "title": "トークを盛り上げてくれるlinebot",
@@ -174,7 +168,7 @@ $(function () {
         "img": "https://yuki0311.com/index-assets/img/fortnite.png",
         "url": "https://fnjpnews.com/fortnitejpdaily-linebot"
     }]);
-    
+
 
 
     $('body').append('<page ease="reverse_cubic">' +
@@ -218,7 +212,7 @@ $(function () {
 
     function add_btn(id, url) {
         $('#' + id).hover(
-            function () {
+            function() {
                 $('#' + id + ' .boder').animate({
                     "width": "20em",
                     "opacity": "1"
@@ -235,7 +229,7 @@ $(function () {
                 }, 1000, 'easeOutCubic');
 
             },
-            function () {
+            function() {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "0px",
@@ -255,7 +249,7 @@ $(function () {
             }
         );
         $('#' + id).click(
-            function () {
+            function() {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "30em",
@@ -276,11 +270,11 @@ $(function () {
                     "opacity": "0"
                 }, 1000, 'easeOutCubic');
                 setTimeout(
-                    function () {
+                    function() {
                         window.open(url, "_self");
                     }, 800);
             }
-        )
+        );
 
     }
 
@@ -288,9 +282,10 @@ $(function () {
         ["twitter", "https://twitter.com/faa0311"],
         ["github", "https://github.com/fa0311"],
         ["wordpress", "https://blog.yuki0311.com"]
-    ].forEach(function (d) {
+    ].forEach(function(d) {
         add_btn(d[0], d[1]);
     });
     easingscroll_load();
     easingscroll_plugin_load();
 });
+var menu_btn_click = function() {};

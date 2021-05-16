@@ -1,6 +1,6 @@
 /*jQuery追加プラグイン*/
-(function ($) {
-    $.fn.acv = function (that) {
+(function($) {
+    $.fn.acv = function(that) {
         var elements = this;
 
         setTimeout(loop, 100);
@@ -18,7 +18,7 @@
         }
     }
 
-    $.fn.animation_text = function (fn, time) {
+    $.fn.animation_text = function(fn, time) {
         let i = 0;
         let text_list = this.text();
         this.text("");
@@ -29,9 +29,9 @@
         let ii = 0;
         let iii = 0;
         var that = this.find("span");
-        this.children().each(function () {
+        this.children().each(function() {
             setTimeout(
-                function () {
+                function() {
                     fn(that.eq(iii));
                     iii++;
                 }, ii * time);
@@ -43,17 +43,24 @@
 function easingscroll_plugin_load() {
 
     $(".menu p").eq($es.eq).addClass("view");
-    $es.view_page_change = function (i) {
+    $es.view_page_change = function(i) {
         $(".menu p").removeClass("view");
-        if ($(window).width() > 1200) {
-            $(".menu p").eq([0, 1, 2, 3][i]).addClass("view");
-        } else if ($(window).width() > 800) {
-            $(".menu p").eq([0, 1, 1, 2, 3][i]).addClass("view");
-        }else{
-            $(".menu p").eq([0, 1, 1, 1, 2, 2, 3][i]).addClass("view");
+        $(".menu p").eq(i).addClass("view");
+
+        menu_btn_click();
+        menu_btn_click = function() {};
+        if ((i == 1 || i == 2) && $(window).width() < 1100) {
+            let container = $("page").eq($es.eq).find(".container");
+
+            container.scrollLeft(300)
+                .css("opacity", "0")
+                .animate({
+                    "scrollLeft": "0",
+                    "opacity": "1"
+                }, 1000, 'easeOutCubic');
         }
     }
-    $es.easelist["reverse_cubic_img"] = function (n) {
+    $es.easelist["reverse_cubic_img"] = function(n) {
         $("page").eq($es.eq).find("img").css({
             "top": n * -0.2
         });
