@@ -278,7 +278,7 @@ $(function() {
     }, {
         "title": "Minecraftサーバー",
         "text": ["自宅鯖でホストしているMinecraft鯖", "参加総数600人"],
-        "img": "https://cdn.discordapp.com/attachments/852906391000973333/852906635645943828/2021-06-11_22.png",
+        "img": "./index-assets/img/kmserver.png",
         "url": "https://mc.yuki0311.com",
         "html": '<a href="https://minecraft.jp/servers/not.available.yuki0311.com"><img style="width: 300px;" src="https://minecraft.jp/servers/not.available.yuki0311.com/banner/1/560x95.png"/></a>'
     }]);
