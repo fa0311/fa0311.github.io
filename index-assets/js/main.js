@@ -1,11 +1,11 @@
-$(window).on('load', function () {
-    $(window).resize(function () {
+$(window).on('load', function() {
+    $(window).resize(function() {
         $es.reload();
     });
     $("#loading").animate({
         "opacity": "0"
     }, 500, 'easeOutCubic');
-    setTimeout(function () {
+    setTimeout(function() {
         clearTimeout(timeout);
         $("#loading").remove();
     }, 500);
@@ -14,7 +14,7 @@ $(window).on('load', function () {
     }, {
         duration: 2000,
         easing: 'swing',
-        step: function () {
+        step: function() {
             $('.header #icon img').css({
                 "-webkit-filter": "blur(" + (50 - this.blurRadius) + "px)",
                 "filter": "blur(" + (50 - this.blurRadius) + "px)"
@@ -24,7 +24,7 @@ $(window).on('load', function () {
 
 
 
-    $('.header #icon #title').animation_text(function (that) {
+    $('.header #icon #title').animation_text(function(that) {
         if ($(window).width() > 1200)
             that.css({
                 "top": "70px",
@@ -41,13 +41,13 @@ $(window).on('load', function () {
             right: "0px",
             opacity: "1"
         }, 1500, 'easeOutCubic');
-        setTimeout(function () {
-            that.hover(function () {
+        setTimeout(function() {
+            that.hover(function() {
                 that.stop();
                 that.animate({
                     top: "-10px",
                 }, 50, 'easeOutCubic');
-            }, function () {
+            }, function() {
                 that.stop();
                 that.animate({
                     top: "0px",
@@ -56,7 +56,7 @@ $(window).on('load', function () {
         }, 1500);
     }, 150);
 });
-$(function () {
+$(function() {
 
     if (navigator.userAgent.indexOf("windows") !== -1 && navigator.userAgent.indexOf("android") !== -1) {
         $("body").append('<div class="alert"><p>【警告】お使いのブラウザ(ie,edge,safari)は当サイトに対応していません</p></div>');
@@ -89,19 +89,19 @@ $(function () {
             '</div>' +
             '</page>')
     $(".sns-feed-btn").click(
-        function () {
+        function() {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
-    [...Array(4)].forEach(function (data, i) {
+    [...Array(4)].forEach(function(data, i) {
         $(".menu p").eq(i).hover(
-            function () {
+            function() {
                 $(".menu .boder").eq(i).stop();
                 $(".menu .boder").eq(i).animate({
                     "width": "100px"
                 }, 200, 'easeOutCubic');
             },
-            function () {
+            function() {
                 $(".menu .boder").eq(i).stop();
                 $(".menu .boder").eq(i).animate({
                     "width": "0px"
@@ -109,14 +109,14 @@ $(function () {
             }
         );
         $(".menu p").eq(i).click(
-            function () {
+            function() {
                 $("html").animate({
                     scrollTop: $es.height * i * $es.scroll_distance
                 }, 1500);
-                menu_btn_click = function () {};
-                setTimeout(function () {
-                    menu_btn_click = function () {
-                        $(".menu .boder").each(function (index, element) {
+                menu_btn_click = function() {};
+                setTimeout(function() {
+                    menu_btn_click = function() {
+                        $(".menu .boder").each(function(index, element) {
                             $(element).css("width", "0");
                         });
                     }
@@ -125,8 +125,8 @@ $(function () {
     });
 
 
-    let article_make = function (data) {
-        data.forEach(function (d, i) {
+    let article_make = function(data) {
+        data.forEach(function(d, i) {
             if (i % 3 == 0) {
                 $("body").append('<page ease="reverse_cubic_img"><div  class="container"></div></page>');
             }
@@ -212,7 +212,7 @@ $(function () {
 
     function add_btn(id, url) {
         $('#' + id).hover(
-            function () {
+            function() {
                 $('#' + id + ' .boder').animate({
                     "width": "20em",
                     "opacity": "1"
@@ -229,7 +229,7 @@ $(function () {
                 }, 1000, 'easeOutCubic');
 
             },
-            function () {
+            function() {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "0px",
@@ -249,7 +249,7 @@ $(function () {
             }
         );
         $('#' + id).click(
-            function () {
+            function() {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "30em",
@@ -270,7 +270,7 @@ $(function () {
                     "opacity": "0"
                 }, 1000, 'easeOutCubic');
                 setTimeout(
-                    function () {
+                    function() {
                         window.open(url, "_self");
                     }, 800);
             }
@@ -282,10 +282,10 @@ $(function () {
         ["twitter", "https://twitter.com/faa0311"],
         ["github", "https://github.com/fa0311"],
         ["wordpress", "https://blog.yuki0311.com"]
-    ].forEach(function (d) {
+    ].forEach(function(d) {
         add_btn(d[0], d[1]);
     });
     easingscroll_load();
     easingscroll_plugin_load();
 });
-var menu_btn_click = function () {};
+var menu_btn_click = function() {};

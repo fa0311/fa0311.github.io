@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'YUGOTHR';
-    src: url(/index-assets/font/YUGOTHR.TTC);
+    src: url(/index-assets/font/YUGOTHRSubsetFont.TTC);
 }
 
 body {
@@ -94,7 +94,6 @@ a {
     .header #icon p {
         font-size: 4vw;
     }
-
     .header #icon img {
         width: 40%;
     }
@@ -104,7 +103,6 @@ a {
     .header #icon img {
         width: 192px;
     }
-
     .header #icon p {
         font-size: 35px;
     }
@@ -143,7 +141,6 @@ a {
     .sns-feed p {
         font-size: 35px;
     }
-
     .sns-feed svg {
         width: 35px;
         height: 35px;
@@ -154,7 +151,6 @@ a {
     .sns-feed p {
         font-size: 4vw;
     }
-
     .sns-feed svg {
         width: 4vw;
         height: 4vw;
