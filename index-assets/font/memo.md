@@ -1,0 +1,1 @@
+https://tools.ikunaga.net/reduce-char/ 便利！
