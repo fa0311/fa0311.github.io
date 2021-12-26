@@ -83,7 +83,7 @@ $(function() {
         .append('<page ease="reverse_cubic_img">' +
             '<div class="header" id="top">' +
             '<div id="icon">' +
-            '<img src="https://yuki0311.com/index-assets/img/icon.jpg" alt="main-img">' +
+            '<img src="./index-assets/img/icon.jpg" alt="main-img">' +
             '<p id="title">yuki0311.com</p>' +
             '</div>' +
             '</div>' +
@@ -165,7 +165,7 @@ $(function() {
     }, {
         "title": "某ゲームのショップ確認linebot",
         "text": "総利用者数32000人 追加人数32000人",
-        "img": "https://yuki0311.com/index-assets/img/fortnite.png",
+        "img": "./index-assets/img/fortnite.png",
         "url": "https://fnjpnews.com/fortnitejpdaily-linebot"
     }]);
 
