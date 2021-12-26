@@ -57,11 +57,11 @@ $(window).on('load', function() {
     }, 150);
 });
 $(function() {
-
-    if (navigator.userAgent.indexOf("windows") !== -1 && navigator.userAgent.indexOf("android") !== -1) {
-        $("body").append('<div class="alert"><p>【警告】お使いのブラウザ(ie,edge,safari)は当サイトに対応していません</p></div>');
-    }
-
+    /*
+        if (navigator.userAgent.indexOf("windows") !== -1 && navigator.userAgent.indexOf("android") !== -1) {
+            $("body").append('<div class="alert"><p>【警告】お使いのブラウザ(ie,edge,safari)は当サイトに対応していません</p></div>');
+        }
+    */
 
 
     $('html,body').animate({
@@ -141,6 +141,22 @@ $(function() {
         })
     };
 
+    article_make([{
+        "title": "youtubeの拡張機能",
+        "text": "使用した主な技術 JavaScript jQuery",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
+        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
+    }, {
+        "title": "トークを盛り上げてくれるlinebot",
+        "text": "使用した主な技術 PHP SQLite LIFF",
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
+        "url": "http://yuki0311.com/pikapika/"
+    }, {
+        "title": "cpu使用率を確認できるサイト",
+        "text": "使用した主な技術 Python Flask JavaScript",
+        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
+        "url": "https://blog.yuki0311.com/cpu-checker/"
+    }]);
     article_make([{
         "title": "youtubeの拡張機能",
         "text": "使用した主な技術 JavaScript jQuery",
