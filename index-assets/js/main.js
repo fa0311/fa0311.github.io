@@ -63,23 +63,30 @@ $(function() {
         }
     */
 
+    $("body").append('<div id="mobile_scroll_help" class="alert"style="bottom: -26px;"><p>左右にスクロールできます</p></div>');
 
     $('html,body').animate({
         scrollTop: 0
     }, 1000);
     $("body").append('<div class="menu">' +
             '<p>TopPage</p>' +
-            '<div class="boder">' +
-            '</div>' +
-            '<p>Tech</p>' +
-            '<div class="boder">' +
-            '</div>' +
-            '<p>Popular</p>' +
-            '<div class="boder">' +
-            '</div>' +
+            '<div class="boder"></div>' +
+            '<p>Bot</p>' +
+            '<div class="boder"></div>' +
+            '<p>BrowserExtension</p>' +
+            '<div class="boder"></div>' +
+            '<p>Library</p>' +
+            '<div class="boder"></div>' +
+            '<p>TwitterLibrary</p>' +
+            '<div class="boder"></div>' +
+            '<p>Minecraft</p>' +
+            '<div class="boder"></div>' +
+            '<p>Contributors</p>' +
+            '<div class="boder"></div>' +
+            '<p>WordPress</p>' +
+            '<div class="boder"></div>' +
             '<p>Social</p>' +
-            '<div class="boder">' +
-            '</div>')
+            '<div class="boder"></div>')
         .append('<page ease="reverse_cubic_img">' +
             '<div class="header" id="top">' +
             '<div id="icon">' +
@@ -93,34 +100,40 @@ $(function() {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
-    [...Array(4)].forEach(function(data, i) {
-        $(".menu p").eq(i).hover(
+    $(".menu p").each(function(i) {
+        let setTimeoutId;
+        $(this).hover(
             function() {
+                let size;
                 $(".menu .boder").eq(i).stop();
+                if ($(this).attr("class") == "view")
+                    size = $(this).text().length * 14 + 4;
+                else
+                    size = $(this).text().length * 9 + 3;
                 $(".menu .boder").eq(i).animate({
-                    "width": "100px"
+                    "width": size
                 }, 200, 'easeOutCubic');
+                clearTimeout(setTimeoutId);
             },
             function() {
                 $(".menu .boder").eq(i).stop();
                 $(".menu .boder").eq(i).animate({
                     "width": "0px"
                 }, 600, 'easeOutCubic');
+                clearTimeout(setTimeoutId);
             }
         );
-        $(".menu p").eq(i).click(
-            function() {
+        $(this).click(
+            () => {
                 $("html").animate({
                     scrollTop: $es.height * i * $es.scroll_distance
                 }, 1500);
-                menu_btn_click = function() {};
-                setTimeout(function() {
-                    menu_btn_click = function() {
-                        $(".menu .boder").each(function(index, element) {
-                            $(element).css("width", "0");
-                        });
-                    }
-                }, 1500);
+                clearTimeout(setTimeoutId);
+                setTimeoutId = setTimeout(() => {
+                    $(".menu .boder").eq(i).animate({
+                        "width": $(this).text().length * 14 + 4
+                    }, 1200, 'easeOutCubic');
+                }, 500);
             });
     });
 
@@ -128,64 +141,177 @@ $(function() {
     let article_make = function(data) {
         data.forEach(function(d, i) {
             if (i % 3 == 0) {
-                $("body").append('<page ease="reverse_cubic_img"><div  class="container"></div></page>');
+                $("body").append('<page ease="reverse_cubic_img"><div class="container container-' + data.length + '"></div></page>');
             }
             $("page").last().children("div").append('<a href="' + d.url + '">' +
                 '<div class="item">' +
                 '<div class="img">' +
-                '<img src=' + d.img + ' alt="画像">' +
+                function(d) {
+                    if (d.img === undefined)
+                        return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
+                    else
+                        return '<img src=' + d.img + ' alt="' + d.title + '">'
+                }(d) +
                 '</div>' +
+
                 '<p class="title">' + d.title + '</p>' +
-                '<p>' + d.text + '</p>' +
+                function(d) {
+                    if (d.text === undefined)
+                        return "";
+                    let re = "";
+                    $.each(d.text, function(i, text) {
+                        re += '<p>' + text + '</p>'
+                    });
+                    return re
+                }(d) +
+
+                '<div class="badge">' +
+                function(d) {
+                    let re = "";
+                    if (d.badge === undefined)
+                        return "";
+                    $.each(["github/release/", "github/stars/"], function(i, text) {
+                        re += '<img src="https://badgen.net/' + text + d.badge + '">';
+                    });
+                    return re
+                }(d) +
+                function(d) {
+                    let re = "";
+                    if (d.moreBadge === undefined)
+                        d.moreBadge = [];
+                    $.each(d.moreBadge, function(i, text) {
+                        re += '<img src="https://badgen.net/' + text + '">';
+                    });
+                    return re
+                }(d) +
+                '</div>' +
+                function(d) {
+                    if (d.html === undefined)
+                        return "";
+                    return d.html
+                }(d) +
                 '</div></a>');
         })
     };
 
     article_make([{
-        "title": "youtubeの拡張機能",
-        "text": "使用した主な技術 JavaScript jQuery",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
-        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
-    }, {
-        "title": "トークを盛り上げてくれるlinebot",
-        "text": "使用した主な技術 PHP SQLite LIFF",
+        "title": "ピカピカBot",
+        "text": ["トークをアシストしてくれるLINEBot", "総利用者数67000人 追加人数6200人", "PHP SQLite LIFF"],
         "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
-        "url": "http://yuki0311.com/pikapika/"
+        "url": "http://yuki0311.com/pikapika/",
+        "html": '<a href="https://lin.ee/Cuy27qb"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>'
     }, {
-        "title": "cpu使用率を確認できるサイト",
-        "text": "使用した主な技術 Python Flask JavaScript",
-        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
-        "url": "https://blog.yuki0311.com/cpu-checker/"
-    }]);
-    article_make([{
-        "title": "youtubeの拡張機能",
-        "text": "使用した主な技術 JavaScript jQuery",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
-        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
-    }, {
-        "title": "トークを盛り上げてくれるlinebot",
-        "text": "使用した主な技術 PHP SQLite LIFF",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
-        "url": "http://yuki0311.com/pikapika/"
-    }, {
-        "title": "cpu使用率を確認できるサイト",
-        "text": "使用した主な技術 Python Flask JavaScript",
-        "img": "https://pbs.twimg.com/ext_tw_video_thumb/1302187969621553152/pu/img/ncyikzqjvNpQ0veU.jpg",
-        "url": "https://blog.yuki0311.com/cpu-checker/"
-    }]);
-    article_make([{
-        "title": "トークを盛り上げてくれるlinebot",
-        "text": "総利用者数67000人 追加人数6200人",
-        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/f256x256.png",
-        "url": "http://yuki0311.com/pikapika/"
-    }, {
-        "title": "某ゲームのショップ確認linebot",
-        "text": "総利用者数32000人 追加人数32000人",
+        "title": "フォートナイトJPDaily",
+        "text": ["某ゲームのショップ確認LINEBot", "総利用者数32000人 追加人数32000人", "PHP SQLite"],
         "img": "./index-assets/img/fortnite.png",
-        "url": "https://fnjpnews.com/fortnitejpdaily-linebot"
+        "url": "https://fnjpnews.com/fortnitejpdaily-linebot",
+        "html": '<a href="https://lin.ee/4bJczeZng"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>'
+    }, {
+        "title": "LineStamp-to-DiscordEmoji",
+        "badge": "fa0311/LineStamp-to-DiscordEmoji",
+        "text": ["DiscordでLINEスタンプを使えるようにするDiscordBot", "Python"],
+        "img": "https://raw.githubusercontent.com/fa0311/LineStamp-to-DiscordEmoji/master/docs/img/addstamp.png",
+        "url": "https://github.com/fa0311/LineStamp-to-DiscordEmoji"
     }]);
 
+    article_make([{
+        "title": "YouTubeライブを快適に視聴する！！！",
+        "badge": "fa0311//youtube-feature-rich",
+        "moreBadge": ["chrome-web-store/users/edkjjpjoagffmeekfcjklnhgihjilcfg", "chrome-web-store/stars/edkjjpjoagffmeekfcjklnhgihjilcfg"],
+        "text": ["配信を快適にするChrome拡張機能", "jQuery CSS"],
+        "img": "https://blog.yuki0311.com/wp-content/uploads/2020/04/1586959008227.jpg",
+        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
+    }, {
+        "title": "Amazonの個人情報を隠します",
+        "badge": "fa0311/amazon_personal_information_hide",
+        "moreBadge": ["chrome-web-store/users/kpffakljoffeckbckheiheogajnofdpc", "chrome-web-store/stars/kpffakljoffeckbckheiheogajnofdpc"],
+        "text": ["Amazonに表示される一部の個人情報を非表示にします", "CSS"],
+        "img": "https://lh3.googleusercontent.com/MvgcW67haPi9XoznVKKAnf8HhWi6Rh8WByzwBduGrxLQKEuAALjoXHRMtfVFEVY8aORHBTCp2oNXvbgQLFsDpAoNUg=w640-h400-e365-rj-sc0x00ffffff",
+        "url": "https://github.com/fa0311/amazon_personal_information_hide"
+    }, {
+        "title": "TwitterのUIの配色を元に戻す",
+        "badge": "fa0311/TwitterRevertColoringExtensions",
+        "text": ["昔のデザインに戻します", "CSS"],
+        "url": "https://github.com/fa0311/TwitterRevertColoringExtensions"
+    }]);
 
+    article_make([{
+        "title": "jump-downloader",
+        "badge": "fa0311/jump-downloader",
+        "text": ["ジャンプ系列の漫画をダウンロードするライブラリ/ソフトウェア", "Python PHP"],
+        "url": "https://github.com/fa0311/jump-downloader"
+    }, {
+        "title": "getAppCubes",
+        "badge": "fa0311/getAppCubes",
+        "text": ["AppCubesのPythonライブラリ", "Python"],
+        "url": "https://github.com/fa0311/getAppCubes"
+    }, {
+        "title": "getCryptocurrencyData",
+        "badge": "fa0311/getCryptocurrencyData",
+        "text": ["仮想通貨の詳細とレートを取得するライブラリ", "Python"],
+        "url": "https://github.com/fa0311/getCryptocurrencyData"
+    }]);
+
+    article_make([{
+        "title": "TwitterFrontendFlow",
+        "text": ["現在非公開です", "Twitterのログインフローを行いツイートやスペースも可能にするライブラリ"],
+        "url": "https://github.com/fa0311/TwitterFrontendFlow"
+    }, {
+        "title": "TweetURLtoData",
+        "badge": "fa0311/TweetURLtoData ",
+        "text": ["TwitterのURLから情報を取得するライブラリ", "Python"],
+        "url": "https://github.com/fa0311/TweetURLtoData"
+    }]);
+
+    article_make([{
+        "title": "Dynmappy",
+        "badge": "fa0311/Dynmappy",
+        "text": ["MinecraftのDynmapをPythonで扱います", "Python"],
+        "img": "./index-assets/img/Dynmappy.png",
+        "url": "https://blog.yuki0311.com/youtube-feature-rich/"
+    }, {
+        "title": "DynmapLogin",
+        "badge": "fa0311/DynmapLogin",
+        "text": ["DynmapのLoginをいい感じにする", "CSS"],
+        "img": "https://raw.githubusercontent.com/fa0311/DynmapLogin/master/docs/img/demo.png",
+        "url": "https://github.com/fa0311/TwitterRevertColoringExtensions"
+    }, {
+        "title": "Minecraftサーバー",
+        "text": ["自宅鯖でホストしているMinecraft鯖", "参加総数600人"],
+        "img": "https://cdn.discordapp.com/attachments/852906391000973333/852906635645943828/2021-06-11_22.png",
+        "url": "https://mc.yuki0311.com",
+        "html": '<a href="https://minecraft.jp/servers/not.available.yuki0311.com"><img style="width: 300px;" src="https://minecraft.jp/servers/not.available.yuki0311.com/banner/1/560x95.png"/></a>'
+    }]);
+
+    article_make([{
+        "title": "Shopkeepers",
+        "badge": "Shopkeepers/Shopkeepers",
+        "text": ["Minecraftプラグイン"],
+        "img": "https://raw.githubusercontent.com/wiki/Shopkeepers/Shopkeepers-Wiki/images/logos/shopkeepers_logo_small_with_text.png",
+        "url": "https://github.com/Shopkeepers/Shopkeepers"
+    }, {
+        "title": "JukeBox",
+        "badge": "SkytAsul/JukeBox",
+        "text": ["Minecraftプラグイン"],
+        "url": "https://github.com/SkytAsul/JukeBox"
+    }]);
+
+    article_make([{
+        "title": "blog.yuki0311.com",
+        "text": ["テーマのFork/プラグインの制作", "AMP"],
+        "img": "./index-assets/img/blog_yuki0311.png",
+        "url": "https://blog.yuki0311.com/"
+    }, {
+        "title": "fnbrjp",
+        "text": ["テーマのFork/プラグインの制作", "PWA"],
+        "img": "./index-assets/img/fnbrjp.png",
+        "url": "https://fnbrjp.com/"
+    }, {
+        "title": "fnjpnews",
+        "text": ["テーマのFork/プラグインの制作", "AMP"],
+        "img": "./index-assets/img/fnjpnews.png",
+        "url": "https://fnjpnews.com/amp/"
+    }]);
 
     $('body').append('<page ease="reverse_cubic">' +
         '<div class="sns-feed">' +
@@ -304,4 +430,3 @@ $(function() {
     easingscroll_load();
     easingscroll_plugin_load();
 });
-var menu_btn_click = function() {};

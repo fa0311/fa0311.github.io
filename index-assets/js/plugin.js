@@ -47,11 +47,19 @@ function easingscroll_plugin_load() {
         $(".menu p").removeClass("view");
         $(".menu p").eq(i).addClass("view");
 
-        menu_btn_click();
-        menu_btn_click = function() {};
-        if ((i == 1 || i == 2) && $(window).width() < 1100) {
+        if (i > 0 && $("page .container").eq(i).children().length > 1 && $(window).width() < 1100) {
+            if (i == 1) {
+                $("#mobile_scroll_help").animate({
+                    "bottom": "0px"
+                }, 300, 'easeOutCubic');
+                setTimeout(function() {
+                    $("#mobile_scroll_help").animate({
+                        "bottom": "-26px",
+                        "opacity": "0"
+                    }, 300, 'easeOutCubic');
+                }, 7000);
+            }
             let container = $("page").eq($es.eq).find(".container");
-
             container.scrollLeft(300)
                 .css("opacity", "0")
                 .animate({
