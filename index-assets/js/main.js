@@ -68,7 +68,8 @@ $(function() {
     $('html,body').animate({
         scrollTop: 0
     }, 1000);
-    $("body").append('<div class="menu">' +
+
+    $("body").append('<div class="menu top">' +
             '<p>TopPage</p>' +
             '<div class="boder"></div>' +
             '<p>Bot</p>' +
@@ -79,6 +80,7 @@ $(function() {
             '<div class="boder"></div>' +
             '<p>TwitterLibrary</p>' +
             '<div class="boder"></div>' +
+            '</div><div class="menu bottom">' +
             '<p>Minecraft</p>' +
             '<div class="boder"></div>' +
             '<p>Contributors</p>' +
@@ -94,30 +96,29 @@ $(function() {
             '<p id="title">yuki0311.com</p>' +
             '</div>' +
             '</div>' +
-            '</page>')
+            '</page>');
+
     $(".sns-feed-btn").click(
         function() {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
+    let setTimeoutId;
     $(".menu p").each(function(i) {
-        let setTimeoutId;
         $(this).hover(
             function() {
                 let size;
-                $(".menu .boder").eq(i).stop();
                 if ($(this).attr("class") == "view")
                     size = $(this).text().length * 14 + 4;
                 else
                     size = $(this).text().length * 9 + 3;
-                $(".menu .boder").eq(i).animate({
+                $(".menu .boder").eq(i).stop().animate({
                     "width": size
                 }, 200, 'easeOutCubic');
                 clearTimeout(setTimeoutId);
             },
             function() {
-                $(".menu .boder").eq(i).stop();
-                $(".menu .boder").eq(i).animate({
+                $(".menu .boder").eq(i).stop().animate({
                     "width": "0px"
                 }, 600, 'easeOutCubic');
                 clearTimeout(setTimeoutId);
@@ -125,12 +126,18 @@ $(function() {
         );
         $(this).click(
             () => {
-                $("html").animate({
+                $("html").stop().animate({
                     scrollTop: $es.height * i * $es.scroll_distance
                 }, 1500);
+                $("html").on('touchmove', function(e) {
+                    $(".menu .boder").eq(i).stop().animate({
+                        "width": "0px"
+                    }, 600, 'easeOutCubic');
+                    $("html").off(e);
+                });
                 clearTimeout(setTimeoutId);
                 setTimeoutId = setTimeout(() => {
-                    $(".menu .boder").eq(i).animate({
+                    $(".menu .boder").eq(i).stop().animate({
                         "width": $(this).text().length * 14 + 4
                     }, 1200, 'easeOutCubic');
                 }, 500);
