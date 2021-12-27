@@ -202,13 +202,13 @@ a {
     justify-content: center;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 780px) {
     .container.container-2 {
         justify-content: center;
     }
 }
 
-@media (min-width: 780px) {
+@media (min-width: 1100px) {
     .container.container-3 {
         justify-content: center;
     }
