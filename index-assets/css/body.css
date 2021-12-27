@@ -25,15 +25,33 @@ a {
 
 .menu {
     position: fixed;
-    top: 50px;
     right: 50px;
     z-index: 10;
 }
 
-@media (max-width: 1024px) {
-    .menu {
+.top {
+    top: 50px;
+}
+
+.bottom {
+    bottom: 50px;
+}
+
+@media (max-width: 1399px) {
+    .top {
         top: 10px;
         right: 10px;
+    }
+    .bottom {
+        bottom: 25px;
+        right: 10px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .bottom {
+        top: 230px;
+        bottom: auto;
     }
 }
 
