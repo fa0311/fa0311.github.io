@@ -6,7 +6,6 @@ $(window).on('load', function () {
         "opacity": "0"
     }, 500, 'easeOutCubic');
     setTimeout(function () {
-        clearTimeout(timeout);
         $("#loading").remove();
     }, 500);
     $('#top #icon img').animate({
