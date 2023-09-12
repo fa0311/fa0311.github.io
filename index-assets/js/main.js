@@ -1,11 +1,11 @@
-$(window).on('load', function() {
-    $(window).resize(function() {
+$(window).on('load', function () {
+    $(window).resize(function () {
         $es.reload();
     });
     $("#loading").animate({
         "opacity": "0"
     }, 500, 'easeOutCubic');
-    setTimeout(function() {
+    setTimeout(function () {
         clearTimeout(timeout);
         $("#loading").remove();
     }, 500);
@@ -14,7 +14,7 @@ $(window).on('load', function() {
     }, {
         duration: 2000,
         easing: 'swing',
-        step: function() {
+        step: function () {
             $('.header #icon img').css({
                 "-webkit-filter": "blur(" + (50 - this.blurRadius) + "px)",
                 "filter": "blur(" + (50 - this.blurRadius) + "px)"
@@ -24,7 +24,7 @@ $(window).on('load', function() {
 
 
 
-    $('.header #icon #title').animation_text(function(that) {
+    $('.header #icon #title').animation_text(function (that) {
         if ($(window).width() > 1200)
             that.css({
                 "top": "70px",
@@ -41,13 +41,13 @@ $(window).on('load', function() {
             right: "0px",
             opacity: "1"
         }, 1500, 'easeOutCubic');
-        setTimeout(function() {
-            that.hover(function() {
+        setTimeout(function () {
+            that.hover(function () {
                 that.stop();
                 that.animate({
                     top: "-10px",
                 }, 50, 'easeOutCubic');
-            }, function() {
+            }, function () {
                 that.stop();
                 that.animate({
                     top: "0px",
@@ -56,7 +56,7 @@ $(window).on('load', function() {
         }, 1500);
     }, 150);
 });
-$(function() {
+$(function () {
     /*
         if (navigator.userAgent.indexOf("windows") !== -1 && navigator.userAgent.indexOf("android") !== -1) {
             $("body").append('<div class="alert"><p>【警告】お使いのブラウザ(ie,edge,safari)は当サイトに対応していません</p></div>');
@@ -70,25 +70,25 @@ $(function() {
     }, 1000);
 
     $("body").append('<div class="menu top">' +
-            '<p>TopPage</p>' +
-            '<div class="boder"></div>' +
-            '<p>Bot</p>' +
-            '<div class="boder"></div>' +
-            '<p>BrowserExtension</p>' +
-            '<div class="boder"></div>' +
-            '<p>Library</p>' +
-            '<div class="boder"></div>' +
-            '<p>TwitterLibrary</p>' +
-            '<div class="boder"></div>' +
-            '</div><div class="menu bottom">' +
-            '<p>Minecraft</p>' +
-            '<div class="boder"></div>' +
-            '<p>Contributors</p>' +
-            '<div class="boder"></div>' +
-            '<p>WordPress</p>' +
-            '<div class="boder"></div>' +
-            '<p>Social</p>' +
-            '<div class="boder"></div>')
+        '<p>TopPage</p>' +
+        '<div class="boder"></div>' +
+        '<p>Bot</p>' +
+        '<div class="boder"></div>' +
+        '<p>BrowserExtension</p>' +
+        '<div class="boder"></div>' +
+        '<p>Library</p>' +
+        '<div class="boder"></div>' +
+        '<p>TwitterLibrary</p>' +
+        '<div class="boder"></div>' +
+        '</div><div class="menu bottom">' +
+        '<p>Minecraft</p>' +
+        '<div class="boder"></div>' +
+        '<p>Contributors</p>' +
+        '<div class="boder"></div>' +
+        '<p>WordPress</p>' +
+        '<div class="boder"></div>' +
+        '<p>Social</p>' +
+        '<div class="boder"></div>')
         .append('<page ease="reverse_cubic_img">' +
             '<div class="header" id="top">' +
             '<div id="icon">' +
@@ -99,14 +99,14 @@ $(function() {
             '</page>');
 
     $(".sns-feed-btn").click(
-        function() {
+        function () {
             $(".sns-feed-btn").toggleClass("sns-feed-btn-open");
         }
     );
     let setTimeoutId;
-    $(".menu p").each(function(i) {
+    $(".menu p").each(function (i) {
         $(this).hover(
-            function() {
+            function () {
                 let size;
                 if ($(this).attr("class") == "view")
                     size = $(this).text().length * 14 + 4;
@@ -117,7 +117,7 @@ $(function() {
                 }, 200, 'easeOutCubic');
                 clearTimeout(setTimeoutId);
             },
-            function() {
+            function () {
                 $(".menu .boder").eq(i).stop().animate({
                     "width": "0px"
                 }, 600, 'easeOutCubic');
@@ -129,7 +129,7 @@ $(function() {
                 $("html").stop().animate({
                     scrollTop: $es.height * i * $es.scroll_distance
                 }, 1500);
-                $("html").on('touchmove', function(e) {
+                $("html").on('touchmove', function (e) {
                     $(".menu .boder").eq(i).stop().animate({
                         "width": "0px"
                     }, 600, 'easeOutCubic');
@@ -145,15 +145,15 @@ $(function() {
     });
 
 
-    let article_make = function(data) {
-        data.forEach(function(d, i) {
+    let article_make = function (data) {
+        data.forEach(function (d, i) {
             if (i % 3 == 0) {
                 $("body").append('<page ease="reverse_cubic_img"><div class="container container-' + data.length + '"></div></page>');
             }
             $("page").last().children("div").append('<a href="' + d.url + '">' +
                 '<div class="item">' +
                 '<div class="img">' +
-                function(d) {
+                function (d) {
                     if (d.img === undefined)
                         return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
                     else
@@ -162,37 +162,37 @@ $(function() {
                 '</div>' +
 
                 '<p class="title">' + d.title + '</p>' +
-                function(d) {
+                function (d) {
                     if (d.text === undefined)
                         return "";
                     let re = "";
-                    $.each(d.text, function(i, text) {
+                    $.each(d.text, function (i, text) {
                         re += '<p>' + text + '</p>'
                     });
                     return re
                 }(d) +
 
                 '<div class="badge">' +
-                function(d) {
+                function (d) {
                     let re = "";
                     if (d.badge === undefined)
                         return "";
-                    $.each(["github/release/", "github/stars/"], function(i, text) {
+                    $.each(["github/release/", "github/stars/"], function (i, text) {
                         re += '<img src="https://badgen.net/' + text + d.badge + '">';
                     });
                     return re
                 }(d) +
-                function(d) {
+                function (d) {
                     let re = "";
                     if (d.moreBadge === undefined)
                         d.moreBadge = [];
-                    $.each(d.moreBadge, function(i, text) {
+                    $.each(d.moreBadge, function (i, text) {
                         re += '<img src="https://badgen.net/' + text + '">';
                     });
                     return re
                 }(d) +
                 '</div>' +
-                function(d) {
+                function (d) {
                     if (d.html === undefined)
                         return "";
                     return d.html
@@ -361,7 +361,7 @@ $(function() {
 
     function add_btn(id, url) {
         $('#' + id).hover(
-            function() {
+            function () {
                 $('#' + id + ' .boder').animate({
                     "width": "20em",
                     "opacity": "1"
@@ -378,7 +378,7 @@ $(function() {
                 }, 1000, 'easeOutCubic');
 
             },
-            function() {
+            function () {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "0px",
@@ -398,7 +398,7 @@ $(function() {
             }
         );
         $('#' + id).click(
-            function() {
+            function () {
                 $('#' + id + ' .boder').stop();
                 $('#' + id + ' .boder').animate({
                     "width": "30em",
@@ -419,7 +419,7 @@ $(function() {
                     "opacity": "0"
                 }, 1000, 'easeOutCubic');
                 setTimeout(
-                    function() {
+                    function () {
                         window.open(url, "_self");
                     }, 800);
             }
@@ -431,7 +431,7 @@ $(function() {
         ["twitter", "https://twitter.com/faa0311"],
         ["github", "https://github.com/fa0311"],
         ["wordpress", "https://blog.yuki0311.com"]
-    ].forEach(function(d) {
+    ].forEach(function (d) {
         add_btn(d[0], d[1]);
     });
     easingscroll_load();

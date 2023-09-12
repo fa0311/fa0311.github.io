@@ -6,7 +6,7 @@ class easingscroll {
         this.scrollToplog = {};
         this.frame_speed = 30;
         this.scroll_distance = 5;
-        this.view_page_change = function () {};
+        this.view_page_change = function () { };
 
         this.easelist = {
             "default": function (n) {

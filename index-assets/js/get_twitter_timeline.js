@@ -1,5 +1,5 @@
 class twitter_timeline_get {
-    constructor(twitter_id, load_end = function () {}, instance = $("body")) {
+    constructor(twitter_id, load_end = function () { }, instance = $("body")) {
         this.load_end_fn = load_end;
         this.division_id = $('twitter_timeline_get').length + 0;
         this.tweet_length = 0;
@@ -149,7 +149,7 @@ class twitter_timeline_get {
         load_end();
     }
 
-    loadmore(load_end = function () {}) {
+    loadmore(load_end = function () { }) {
         this.load_end_fn = load_end;
         this.contents.find('div.timeline-LoadMore').find('button').click();
         this.load_wait();

@@ -1,6 +1,6 @@
 /*jQuery追加プラグイン*/
-(function($) {
-    $.fn.acv = function(that) {
+(function ($) {
+    $.fn.acv = function (that) {
         var elements = this;
 
         setTimeout(loop, 100);
@@ -18,7 +18,7 @@
         }
     }
 
-    $.fn.animation_text = function(fn, time) {
+    $.fn.animation_text = function (fn, time) {
         let i = 0;
         let text_list = this.text();
         this.text("");
@@ -29,9 +29,9 @@
         let ii = 0;
         let iii = 0;
         var that = this.find("span");
-        this.children().each(function() {
+        this.children().each(function () {
             setTimeout(
-                function() {
+                function () {
                     fn(that.eq(iii));
                     iii++;
                 }, ii * time);
@@ -43,7 +43,7 @@
 function easingscroll_plugin_load() {
 
     $(".menu p").eq($es.eq).addClass("view");
-    $es.view_page_change = function(i) {
+    $es.view_page_change = function (i) {
         $(".menu p").removeClass("view");
         $(".menu p").eq(i).addClass("view");
 
@@ -52,7 +52,7 @@ function easingscroll_plugin_load() {
                 $("#mobile_scroll_help").animate({
                     "bottom": "0px"
                 }, 300, 'easeOutCubic');
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#mobile_scroll_help").animate({
                         "bottom": "-26px",
                         "opacity": "0"
@@ -68,7 +68,7 @@ function easingscroll_plugin_load() {
                 }, 1000, 'easeOutCubic');
         }
     }
-    $es.easelist["reverse_cubic_img"] = function(n) {
+    $es.easelist["reverse_cubic_img"] = function (n) {
         $("page").eq($es.eq).find("img").css({
             "top": n * -0.2
         });
